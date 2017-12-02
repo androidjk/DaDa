@@ -37,19 +37,37 @@
         <!--android:layout_margin="16dp"-->
         <!--android:src="@drawable/ic_done" />-->
         <!--</FrameLayout>-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom" >
+    <Button
+    android:id="@+id/test"
+    android:layout_width="0dp"
+        android:layout_weight="1"
+    android:layout_height="wrap_content"
+    android:text="我要下单"
+    android:layout_gravity="bottom"
+        android:background="#f9f9f9"/>
+    <Button
+        android:id="@+id/button_myin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="我的信息"
+        android:background="#f9f9f9"/>
+    <Button
+        android:id="@+id/button_dingdan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="我的订单"
+        android:background="#f9f9f9"/>
+</LinearLayout>
 
-            <Button
-                android:id="@+id/test"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="111" />
-        </LinearLayout>
+
     </FrameLayout>
 
     <TextView
