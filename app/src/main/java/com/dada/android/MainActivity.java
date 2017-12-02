@@ -17,6 +17,10 @@ public class MainActivity extends BaseActivity {
     LinearLayout linear;
     Button button;
 
+    /**
+     * 首页
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
