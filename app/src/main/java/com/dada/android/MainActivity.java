@@ -15,7 +15,7 @@ public class MainActivity extends BaseActivity {
     public static MainActivity mainActivity;
     MakeMenu makeMenu = new MakeMenu();
     LinearLayout linear;
-    Button button;
+    Button button,button_dingdan;
 
     /**
      * 首页
@@ -28,6 +28,14 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         mainActivity = this;
         button = (Button) findViewById(R.id.test);
+        button_dingdan=(Button)findViewById(R.id.button_dingdan);
+        button_dingdan.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,ShoppingAdapter.class);
+                startActivity(intent);
+            }
+        });
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
