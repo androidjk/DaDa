@@ -109,7 +109,7 @@ public class ShoppingAdapter extends BaseAdapter {
         holder.tvCommodityNum.setText(" X" + cark.getNum() + "");
         holder.tvCommodityShowNum.setText(cark.getNum() + "");
         Glide.with(context)
-                .load(cark.getImageUrl())
+                .load(cark.getDrawable())
 //                .placeholder(R.drawable.loading_spinner)
                 .crossFade()
                 .into(holder.ivShowPic);

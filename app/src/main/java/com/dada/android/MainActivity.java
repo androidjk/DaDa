@@ -32,8 +32,8 @@ public class MainActivity extends BaseActivity {
         button_dingdan.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,ShoppingAdapter.class);
-                startActivity(intent);
+//                Intent intent=new Intent(MainActivity.this,ShoppingAdapter.class);
+//                startActivity(intent);
             }
         });
         button.setOnClickListener(new OnClickListener() {

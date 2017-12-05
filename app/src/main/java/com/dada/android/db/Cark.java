@@ -19,6 +19,14 @@ public class Cark extends BmobObject {
     private String type;
     private Integer id;
     private BmobFile drawable;
+    private boolean choosed;
+    private String attribute;
+
+    public void setAttribute(String attribute) {
+        this.attribute = attribute;
+    }
+
+
     public BmobFile getDrawable() {
         return drawable;
     }
@@ -26,7 +34,6 @@ public class Cark extends BmobObject {
     public void setDrawable(BmobFile pic) {
         this.drawable = pic;
     }
-
 
 
     public Integer getId() {
@@ -78,4 +85,15 @@ public class Cark extends BmobObject {
         return type;
     }
 
+    public boolean isChoosed() {
+        return choosed;
+    }
+
+    public String getAttribute() {
+        return attribute;
+    }
+
+    public void setChoosed(boolean choosed) {
+        this.choosed = choosed;
+    }
 }

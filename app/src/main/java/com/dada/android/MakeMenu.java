@@ -1,28 +1,20 @@
 package com.dada.android;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Context;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.dada.android.db.Cark;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -41,65 +33,73 @@ public class MakeMenu extends AppCompatActivity {
     private Button show, find;
     private SeekBar seekBar;
     private String type;
+    private ImageView iv_show;
 
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shouye);
         initNews();
         setListener();
-        BmobFile bmobfile =new BmobFile("xxx.png","","http://bmob-cdn-15323.b0.upaiyun.com/2017/11/29/cc9ac3e340cbcd098056465c6e35369f.png");
-//        bmobfile.download(new DownloadFileListener() {
-//            @Override
-//            public void done(String s, BmobException e) {
-//                if (e==null){
-//                    String url=s;
-//
-//                    Toast.makeText(MakeMenu.this, "下载成功，保存路径", Toast.LENGTH_SHORT).show();
-//                }else {
-//                    Toast.makeText(MakeMenu.this, "下载成功", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onProgress(Integer integer, long l) {
-//                Log.i("bmob", "下载进度：" + integer + "," +l);
-//            }
-//        });
-        BmobQuery<Cark> query1 = new BmobQuery<Cark>();
-
-    }
-
-
-    public void downloadFile(final BmobFile file) {
-        //允许设置下载文件的存储路径，默认下载文件的目录为：context.getApplicationContext().getCacheDir()+"/bmob/"
-        file.download(new DownloadFileListener() {
-
+        final BmobFile bmobfile = new BmobFile("aodia4.png", "", "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/05/3d424f3140bde715809cc98804ba7110.png");
+        bmobfile.download(new DownloadFileListener() {
             @Override
-            public void onStart() {
-                Toast.makeText(MakeMenu.this, "开始下载：", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void done(String savePath, BmobException e) {
-                if (e == null) {
-                    String s=file.getFileUrl();
+            public void done(String s, BmobException e) {
+                if (e==null){
+                    Glide.with(MakeMenu.this)
+                            .load(s)
+                            .placeholder(R.drawable.audia4)
+                            .into(iv_show);
                     Toast.makeText(MakeMenu.this, "下载成功，保存路径", Toast.LENGTH_SHORT).show();
-                } else {
+                }else {
                     Toast.makeText(MakeMenu.this, "下载成功", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onProgress(Integer value, long newworkSpeed) {
-                Log.i("bmob", "下载进度：" + value + "," + newworkSpeed);
+            public void onProgress(Integer integer, long l) {
+                Log.i("bmob", "下载进度：" + integer + "," +l);
             }
         });
     }
+
+
+//    public void downloadFile(final BmobFile file) {
+//        //允许设置下载文件的存储路径，默认下载文件的目录为：context.getApplicationContext().getCacheDir()+"/bmob/"
+//        file.download(new DownloadFileListener() {
+//
+//            @Override
+//            public void onStart() {
+//                Toast.makeText(MakeMenu.this, "开始下载：", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void done(String savePath, BmobException e) {
+//                if (e == null) {
+//                    String s=file.getFileUrl();
+//                    Glide.with(context)
+//                            .load(s)
+//                .placeholder(R.drawable.audia4)
+//                            .crossFade()
+//                            .into(iv_show);
+//                    Toast.makeText(MakeMenu.this, "下载成功，保存路径", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Toast.makeText(MakeMenu.this, "下载成功", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onProgress(Integer value, long newworkSpeed) {
+//                Log.i("bmob", "下载进度：" + value + "," + newworkSpeed);
+//            }
+//        });
+//    }
 
     public void initNews() {
         show = (Button) findViewById(R.id.button_show);
         seekBar = (SeekBar) findViewById(R.id.seekbar);
         find = (Button) findViewById(R.id.button_find);
+        iv_show=(ImageView)findViewById(R.id.iv_show);
     }
 
     public void setListener() {
@@ -130,7 +130,7 @@ class ButtonListener implements OnClickListener {
                             for (Cark cark : list) {
                                 BmobFile file = cark.getDrawable();
                                 if (file != null) {
-                                    makeMenu.downloadFile(file);
+//                                    makeMenu.downloadFile(file);
                                     Log.d("MakeMenu", "Find!!！");
                                 }
                             }
