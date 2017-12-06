@@ -24,6 +24,7 @@ import cn.bmob.v3.listener.DownloadFileListener;
 import cn.bmob.v3.listener.FindListener;
 
 import static android.widget.Toast.*;
+import static com.dada.android.R.id.iv_show;
 
 /**
  * Created by asus1 on 2017/11/27.
@@ -33,7 +34,7 @@ public class MakeMenu extends AppCompatActivity {
     private Button show, find;
     private SeekBar seekBar;
     private String type;
-    private ImageView iv_show;
+    static private ImageView iv_show;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -41,18 +42,20 @@ public class MakeMenu extends AppCompatActivity {
         setContentView(R.layout.shouye);
         initNews();
         setListener();
+    }
+    public void downloadPic(final View view){
         final BmobFile bmobfile = new BmobFile("aodia4.png", "", "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/05/3d424f3140bde715809cc98804ba7110.png");
         bmobfile.download(new DownloadFileListener() {
             @Override
             public void done(String s, BmobException e) {
                 if (e==null){
-                    Glide.with(MakeMenu.this)
+                    Glide.with(view.getContext())
                             .load(s)
                             .placeholder(R.drawable.audia4)
                             .into(iv_show);
-                    Toast.makeText(MakeMenu.this, "下载成功，保存路径", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "下载成功，保存路径", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(MakeMenu.this, "下载成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "下载成功", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -62,38 +65,6 @@ public class MakeMenu extends AppCompatActivity {
             }
         });
     }
-
-
-//    public void downloadFile(final BmobFile file) {
-//        //允许设置下载文件的存储路径，默认下载文件的目录为：context.getApplicationContext().getCacheDir()+"/bmob/"
-//        file.download(new DownloadFileListener() {
-//
-//            @Override
-//            public void onStart() {
-//                Toast.makeText(MakeMenu.this, "开始下载：", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void done(String savePath, BmobException e) {
-//                if (e == null) {
-//                    String s=file.getFileUrl();
-//                    Glide.with(context)
-//                            .load(s)
-//                .placeholder(R.drawable.audia4)
-//                            .crossFade()
-//                            .into(iv_show);
-//                    Toast.makeText(MakeMenu.this, "下载成功，保存路径", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Toast.makeText(MakeMenu.this, "下载成功", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onProgress(Integer value, long newworkSpeed) {
-//                Log.i("bmob", "下载进度：" + value + "," + newworkSpeed);
-//            }
-//        });
-//    }
 
     public void initNews() {
         show = (Button) findViewById(R.id.button_show);
@@ -114,31 +85,14 @@ public class MakeMenu extends AppCompatActivity {
 class ButtonListener implements OnClickListener {
 
     @Override
-    public void onClick(View view) {
+    public void onClick(final View view) {
         switch (view.getId()) {
             case R.id.button_show:
                 Toast.makeText(MainActivity.mainActivity, "show", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_find:
-
-                final MakeMenu makeMenu = new MakeMenu();
-                BmobQuery<Cark> query = new BmobQuery<Cark>();
-                query.findObjects(new FindListener<Cark>() {
-                    @Override
-                    public void done(List<Cark> list, BmobException e) {
-                        if (e == null) {
-                            for (Cark cark : list) {
-                                BmobFile file = cark.getDrawable();
-                                if (file != null) {
-//                                    makeMenu.downloadFile(file);
-                                    Log.d("MakeMenu", "Find!!！");
-                                }
-                            }
-                        } else {
-                            Toast.makeText(makeMenu, "查询失败", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                MakeMenu makeMenu=new MakeMenu();
+                makeMenu.downloadPic(view);
                 break;
         }
     }
