@@ -29,7 +29,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MakeMenu" />
+        <activity android:name=".MakeMenu"
+            android:exported="true"/>
         <activity android:name=".Zhuce"></activity>
     </application>
 
