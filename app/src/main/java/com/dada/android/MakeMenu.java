@@ -83,6 +83,7 @@ public class MakeMenu extends AppCompatActivity {
         rb_kec = (RadioButton) findViewById(R.id.cb_gongjiao);
         radioGroup = (RadioGroup) findViewById(R.id.rg_cheku);
         //jinaki
+        //复习
     }
 
     public void setListener() {
