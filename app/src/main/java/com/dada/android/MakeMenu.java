@@ -41,7 +41,6 @@ public class MakeMenu extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton rb_jc, rb_kc, rb_kec, rb_hc;
     static private ImageView iv_show;
-
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -84,6 +83,9 @@ public class MakeMenu extends AppCompatActivity {
         radioGroup = (RadioGroup) findViewById(R.id.rg_cheku);
         //jinaki
         //复习
+        //又是一天没有敲码
+        //git 不成功
+        
     }
 
     public void setListener() {
