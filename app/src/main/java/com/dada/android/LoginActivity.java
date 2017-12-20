@@ -29,6 +29,10 @@ public class LoginActivity extends BaseActivity {
     private Button denglu;
     private Button zhuce;
 
+    /**
+     * 用户登录
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,40 +76,5 @@ public class LoginActivity extends BaseActivity {
                 });
             }
         });
-//        denglu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//
-//            public void onClick(View view) {
-//                BmobQuery<Person> query = new BmobQuery<>();
-//                query.addWhereEqualTo("name", account.getText().toString());
-//                query.count(Person.class, new CountListener() {
-//                    @Override
-//                    public void done(Integer integer, BmobException e) {
-//                        if (e == null && integer == 0) {
-//                            Toast.makeText(LoginActivity.this, "不存在该用户", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Log.i("bmob", "失败：" + e.getMessage() + "," + e.getErrorCode());
-//                        }
-//                    }
-//                });
-//                query.findObjects(new FindListener<Person>() {
-//                    @Override
-//                    public void done(List<Person> list, BmobException e) {
-//                        if (e == null) {
-//                            for (Person person : list) {
-//                                if (password.getText().toString().equals(person.getPassword())) {
-//                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                                    startActivity(intent);
-//                                    finish();
-//                                } else {
-//                                    Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//                        }
-//                    }
-//                });
-//            }
-//        });
-//    }
     }
 }
