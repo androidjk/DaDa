@@ -18,7 +18,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.dada.android.db.Cark;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobFile;
@@ -44,13 +46,15 @@ public class MakeMenu extends AppCompatActivity {
     static private ImageView iv_show;
     static String carType;
     static int price = 0;
-
+     Cark cark=new Cark();
+    static List list_price=new ArrayList();
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shouye);
         initViews();
         setListener();
+
     }
 
 
@@ -69,23 +73,29 @@ public class MakeMenu extends AppCompatActivity {
                     if (e == null) {
                         if (carType == "keche") {
                             if (price <= 500) {
+                                cark.setName("马自达");
                                 pName = "mazida.png";
                                 place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/ff2a007a405ade6b80074cfc3184faea.png";
                             } else if (price > 500) {
+                                cark.setName("奥迪A4");
                                 pName = "aodia4";
                                 place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/05/3d424f3140bde715809cc98804ba7110.png";
                             }
                         } else if (carType == "gongjiao") {
+                            cark.setName("金龙");
                             pName = "jinlong.png";
                             place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/bdd0b68240bc074f80c312fe26d16d35.png";
                         } else if (carType == "pika") {
+                            cark.setName("皮卡雪");
                             pName = "pikaxue.png";
                             place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/4ec4f4cb40631fe880b7d4a472246c87.png";
                         } else if (carType == "huoche") {
                             if (price <= 500) {
+                                cark.setName("五菱宏光");
                                 pName = "wuling.png";
                                 place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/f1a13a65408205a780359c7b787c7e98.png";
                             } else if (price > 500) {
+                                cark.setName("依维柯");
                                 pName = "yiweike.png";
                                 place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/43f65e4d40adb3848047e18dcabf5d92.png";
                             }
@@ -119,6 +129,29 @@ public class MakeMenu extends AppCompatActivity {
      * 绑定布局
      */
     public void sumPrice(final View view){
+        BmobQuery<Cark> query=new BmobQuery<Cark>();
+        if (cark.getName()!=null){
+            query.addWhereEqualTo("name",cark.getName());
+            query.findObjects(new FindListener<Cark>() {
+                @Override
+                public void done(List<Cark> list, BmobException e) {
+                    for(Cark cark:list){
+                       list_price.add(cark.getPrice());
+                    }
+                    for (Object  a:list_price){
+                        price+=Integer.valueOf(a.toString());
+                        Log.d("价格：",String.valueOf(price));
+                    }
+                    Log.d("price集合中元素个数：",String.valueOf(list_price.size()));
+                    Log.d("list集合中元素个数：",String.valueOf(list.size()));
+                }
+            });
+        }else {
+            Log.d("价格：","为空值");
+        }
+
+    }
+    public void delePrice(final View view){
 
     }
     public void initViews() {
@@ -168,6 +201,7 @@ class ButtonListener implements OnClickListener {
                 makeMenu.sumPrice(view);
                 break;
             case R.id.bt_delete:
+                makeMenu.delePrice(view);
                 break;
         }
     }
