@@ -19,7 +19,9 @@ import com.bumptech.glide.Glide;
 import com.dada.android.db.Cark;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import cn.bmob.v3.BmobQuery;
@@ -38,7 +40,7 @@ import static com.dada.android.R.id.iv_show;
  */
 
 public class MakeMenu extends AppCompatActivity {
-    private Button show, find,add ,delete;
+    private Button show, find, add, delete;
     private SeekBar seekBar;
     private String type;
     private RadioGroup radioGroup;
@@ -46,8 +48,10 @@ public class MakeMenu extends AppCompatActivity {
     static private ImageView iv_show;
     static String carType;
     static int price = 0;
-     Cark cark=new Cark();
-    static List list_price=new ArrayList();
+    Cark cark = new Cark();
+    static Map list_price = new HashMap();
+
+    static List list_name=new ArrayList();
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -64,99 +68,117 @@ public class MakeMenu extends AppCompatActivity {
     public void downloadPic(final View view) {
         BmobQuery<Cark> query = new BmobQuery<>();
         query.addWhereEqualTo("type", carType);
-            query.findObjects(new FindListener<Cark>() {
-                @Override
+        query.findObjects(new FindListener<Cark>() {
+            @Override
 
-                public void done(List<Cark> list, BmobException e) {
-                    String pName = null, place = null;
-                    Log.d("测试", carType);
-                    if (e == null) {
-                        if (carType == "keche") {
-                            if (price <= 500) {
-                                cark.setName("马自达");
-                                pName = "mazida.png";
-                                place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/ff2a007a405ade6b80074cfc3184faea.png";
-                            } else if (price > 500) {
-                                cark.setName("奥迪A4");
-                                pName = "aodia4";
-                                place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/05/3d424f3140bde715809cc98804ba7110.png";
-                            }
-                        } else if (carType == "gongjiao") {
-                            cark.setName("金龙");
-                            pName = "jinlong.png";
-                            place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/bdd0b68240bc074f80c312fe26d16d35.png";
-                        } else if (carType == "pika") {
-                            cark.setName("皮卡雪");
-                            pName = "pikaxue.png";
-                            place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/4ec4f4cb40631fe880b7d4a472246c87.png";
-                        } else if (carType == "huoche") {
-                            if (price <= 500) {
-                                cark.setName("五菱宏光");
-                                pName = "wuling.png";
-                                place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/f1a13a65408205a780359c7b787c7e98.png";
-                            } else if (price > 500) {
-                                cark.setName("依维柯");
-                                pName = "yiweike.png";
-                                place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/43f65e4d40adb3848047e18dcabf5d92.png";
-                            }
+            public void done(List<Cark> list, BmobException e) {
+                String pName = null, place = null;
+                Log.d("测试", carType);
+                if (e == null) {
+                    if (carType == "keche") {
+                        if (price <= 500) {
+                            cark.setName("马自达");
+                            pName = "mazida.png";
+                            place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/ff2a007a405ade6b80074cfc3184faea.png";
+                        } else if (price > 500) {
+                            cark.setName("奥迪A4");
+                            pName = "aodia4";
+                            place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/05/3d424f3140bde715809cc98804ba7110.png";
+                        }
+                    } else if (carType == "gongjiao") {
+                        cark.setName("金龙");
+                        pName = "jinlong.png";
+                        place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/bdd0b68240bc074f80c312fe26d16d35.png";
+                    } else if (carType == "pika") {
+                        cark.setName("皮卡雪");
+                        pName = "pikaxue.png";
+                        place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/4ec4f4cb40631fe880b7d4a472246c87.png";
+                    } else if (carType == "huoche") {
+                        if (price <= 500) {
+                            cark.setName("五菱宏光");
+                            pName = "wuling.png";
+                            place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/f1a13a65408205a780359c7b787c7e98.png";
+                        } else if (price > 500) {
+                            cark.setName("依维柯");
+                            pName = "yiweike.png";
+                            place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/43f65e4d40adb3848047e18dcabf5d92.png";
                         }
                     }
-                    final BmobFile bmobfile = new BmobFile(pName, "", place);
-                    bmobfile.download(new DownloadFileListener() {
-                        @Override
-                        public void done(String s, BmobException e) {
-                            if (e == null) {
-                                Glide.with(view.getContext())
-                                        .load(s)
-//                            .placeholder(R.drawable.audia4)
-                                        .into(iv_show);
-                                Toast.makeText(view.getContext(), "下载成功，保存路径", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(view.getContext(), "下载成功", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onProgress(Integer integer, long l) {
-                            Log.i("bmob", "下载进度：" + integer + "," + l);
-                        }
-                    });
                 }
-            });
+                final BmobFile bmobfile = new BmobFile(pName, "", place);
+                bmobfile.download(new DownloadFileListener() {
+                    @Override
+                    public void done(String s, BmobException e) {
+                        if (e == null) {
+                            Glide.with(view.getContext())
+                                    .load(s)
+                                    .into(iv_show);
+                            Toast.makeText(view.getContext(), "下载成功，保存路径", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(view.getContext(), "下载成功", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onProgress(Integer integer, long l) {
+                        Log.i("bmob", "下载进度：" + integer + "," + l);
+                    }
+                });
+            }
+        });
     }
 
     /**
      * 绑定布局
      */
-    public void sumPrice(final View view){
-        BmobQuery<Cark> query=new BmobQuery<Cark>();
-        if (cark.getName()!=null){
-            query.addWhereEqualTo("name",cark.getName());
+    public void sumPrice(final View view) {
+        BmobQuery<Cark> query = new BmobQuery<Cark>();
+        if (cark.getName() != null) {
+            query.addWhereEqualTo("name", cark.getName());
             query.findObjects(new FindListener<Cark>() {
                 @Override
                 public void done(List<Cark> list, BmobException e) {
-                    for(Cark cark:list){
-                       list_price.add(cark.getPrice());
+                    for (Cark cark : list) {
+                        list_name.add(cark.getName());
+                        list_price.put(cark.getName(),cark.getPrice());
+                        price+=cark.getPrice();
                     }
-                    for (Object  a:list_price){
-                        price+=Integer.valueOf(a.toString());
-                        Log.d("价格：",String.valueOf(price));
-                    }
-                    Log.d("price集合中元素个数：",String.valueOf(list_price.size()));
-                    Log.d("list集合中元素个数：",String.valueOf(list.size()));
+                        Log.d("价格：", String.valueOf(price));
+
+                    Log.d("price集合中元素个数：", String.valueOf(list_price.size()));
+                    Log.d("list集合中元素个数：", String.valueOf(list.size()));
                 }
             });
-        }else {
-            Log.d("价格：","为空值");
+        } else {
+            Log.d("价格：", "为空值");
         }
 
     }
-    public void delePrice(final View view){
 
+    public void delePrice(final View view) {
+        if (cark.getName()!=null){
+            if (list_name!=null){
+                for (Object a:list_name){
+                    if (cark.getName().equals(a.toString())){
+                        price-=Integer.valueOf(list_price.get(cark.getName()).toString());
+                        Log.d("删除车辆成功",String.valueOf(price));
+                        list_name.remove(a);
+                        break;
+                    }else{
+                        Log.d("是否添加该车辆","否");
+                    }
+                }
+            }else{
+                Log.d("订单","null");
+            }
+        }else {
+            Log.d("车名：","null");
+        }
     }
+
     public void initViews() {
-        add=(Button)findViewById(R.id.bt_add);
-        delete=(Button)findViewById(R.id.bt_delete);
+        add = (Button) findViewById(R.id.bt_add);
+        delete = (Button) findViewById(R.id.bt_delete);
         show = (Button) findViewById(R.id.button_show);
         seekBar = (SeekBar) findViewById(R.id.seekbar);
         find = (Button) findViewById(R.id.button_find);
@@ -188,6 +210,7 @@ public class MakeMenu extends AppCompatActivity {
  */
 class ButtonListener implements OnClickListener {
     MakeMenu makeMenu = new MakeMenu();
+
     @Override
     public void onClick(final View view) {
         switch (view.getId()) {
