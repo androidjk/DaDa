@@ -11,6 +11,15 @@ public class DingDan extends BmobObject {
     private Integer num;
     private String cid;
     private String pid;
+    private String cname;
+
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
 
     public Integer getNum() {
         return num;

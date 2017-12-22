@@ -21,17 +21,17 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="dada"></activity>
-        <activity android:name=".LoginActivity">
+            android:label="dada" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".Zhuce" />
+        <activity android:name=".db.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MakeMenu"
-            android:exported="true"/>
-        <activity android:name=".Zhuce"></activity>
+        <activity android:name=".doMenu"></activity>
     </application>
 
 </manifest>

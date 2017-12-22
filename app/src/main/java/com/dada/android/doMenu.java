@@ -1,28 +1,27 @@
 package com.dada.android;
 
-import android.content.Context;
-import android.os.Bundle;
+import android.content.DialogInterface;
 import android.support.annotation.IdRes;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.dada.android.db.Cark;
+import com.dada.android.db.DingDan;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobFile;
@@ -30,16 +29,10 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.DownloadFileListener;
 import cn.bmob.v3.listener.FindListener;
 
-import static android.widget.Toast.*;
-import static com.dada.android.R.id.cancel_action;
-import static com.dada.android.R.id.default_activity_button;
-import static com.dada.android.R.id.iv_show;
+import static android.widget.Toast.LENGTH_SHORT;
+import static com.dada.android.doMenu.list_name;
 
-/**
- * Created by asus1 on 2017/11/27.
- */
-
-public class MakeMenu extends AppCompatActivity {
+public class doMenu extends BaseActivity {
     private Button show, find, add, delete;
     private SeekBar seekBar;
     private String type;
@@ -53,7 +46,6 @@ public class MakeMenu extends AppCompatActivity {
 
     static List list_name=new ArrayList();
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shouye);
         initViews();
@@ -143,7 +135,7 @@ public class MakeMenu extends AppCompatActivity {
                         list_price.put(cark.getName(),cark.getPrice());
                         price+=cark.getPrice();
                     }
-                        Log.d("价格：", String.valueOf(price));
+                    Log.d("价格：", String.valueOf(price));
 
                     Log.d("price集合中元素个数：", String.valueOf(list_price.size()));
                     Log.d("list集合中元素个数：", String.valueOf(list.size()));
@@ -208,14 +200,33 @@ public class MakeMenu extends AppCompatActivity {
 /**
  * 按钮监听器
  */
-class ButtonListener implements OnClickListener {
-    MakeMenu makeMenu = new MakeMenu();
+class ButtonListener implements View.OnClickListener {
+    doMenu makeMenu = new doMenu();
 
     @Override
     public void onClick(final View view) {
         switch (view.getId()) {
             case R.id.button_show:
-                Toast.makeText(MainActivity.mainActivity, "show", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder dialog=new AlertDialog.Builder(view.getContext());
+                dialog.setTitle("确认订单");
+                dialog.setMessage("确认提交订单吗？");
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        DingDan dingDan=new DingDan();
+                        for (Object a:list_name){
+                            dingDan.setCname(a.toString());
+                        }
+                    }
+                });
+                dialog.setNegativeButton("再想想", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                dialog.show();
                 break;
             case R.id.button_find:
                 makeMenu.downloadPic(view);
@@ -233,8 +244,8 @@ class ButtonListener implements OnClickListener {
 /**
  * 拉条监听器
  */
-class SeekBarListener implements OnSeekBarChangeListener {
-    MakeMenu makeMenu = new MakeMenu();
+class SeekBarListener implements SeekBar.OnSeekBarChangeListener {
+    doMenu makeMenu = new doMenu();
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -258,7 +269,7 @@ class SeekBarListener implements OnSeekBarChangeListener {
  * 单选框监听器
  */
 class RadioButtonListener implements RadioGroup.OnCheckedChangeListener {
-    MakeMenu makeMenu = new MakeMenu();
+    doMenu makeMenu = new doMenu();
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
@@ -284,4 +295,3 @@ class RadioButtonListener implements RadioGroup.OnCheckedChangeListener {
         }
     }
 }
-
