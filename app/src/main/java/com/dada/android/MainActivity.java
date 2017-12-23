@@ -1,6 +1,8 @@
 package com.dada.android;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
@@ -12,6 +14,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
@@ -19,13 +26,16 @@ import cn.bmob.v3.BmobUser;
 public class MainActivity extends BaseActivity {
     private DrawerLayout mDrawLayout;
     public static MainActivity mainActivity;
+    private boolean quit=false;
     doMenu makeMenu = new doMenu();
     LinearLayout linear;
     Button button, button_dingdan;
-
+    Toolbar toolbar;
+    NavigationView navView;
+    TextView userName,userEmail;
+    static String name,email;
     /**
      * 首页
-     *
      * @param savedInstanceState
      */
     @Override
@@ -36,18 +46,25 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         Bmob.initialize(this, "daca4eedf8c0f12bbdb2143fbb64605b");
         mainActivity = this;
-        button = (Button) findViewById(R.id.test);
-        Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
+        initViews();
         setSupportActionBar(toolbar);
+
+//       userName=(TextView)findViewById(R.id.username);
+//        userEmail=(TextView)findViewById(R.id.mail);
+//         name=(String)BmobUser.getObjectByKey("username");
+//         email=(String)BmobUser.getObjectByKey("email");
+//        Log.d("改Text值",name);
+//        Log.d("改Text值",email);
+//        userName.setText(name);
+//        userEmail.setText(email+"");
         /**
          * 订单按钮
          */
-        button_dingdan = (Button) findViewById(R.id.button_dingdan);
         button_dingdan.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent=new Intent(MainActivity.this,ShoppingAdapter.class);
-//                startActivity(intent);
+                Intent intent=new Intent(MainActivity.this,ShoppingAdapter.class);
+                startActivity(intent);
             }
         });
         button.setOnClickListener(new OnClickListener() {
@@ -58,9 +75,27 @@ public class MainActivity extends BaseActivity {
             }
         });
         /**
+         * 滑动菜单项点击事项
+         */
+        navView.setCheckedItem(R.id.nav_call);
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.nav_id:
+                        BmobUser.logOut();   //清除缓存用户对象
+                        Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+                        startActivity(intent);
+                        ActivityCollector.finishAll();
+                        break;
+                }
+//               mDrawLayout.closeDrawers();
+                return true;
+            }
+        });
+        /**
          * 增加导航
          */
-        mDrawLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -77,34 +112,28 @@ public class MainActivity extends BaseActivity {
         }
         return true;
     }
-
-
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        mDrawLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.setDisplayHomeAsUpEnabled(true);
-//            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
-//        }
-//    }
-//
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.toolbar, menu);
-//        return true;
-//    }
-//
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.back_up:
-//                Toast.makeText(this, "You Clicked Backup", Toast.LENGTH_SHORT).show();
-//                break;
-//            case android.R.id.home:
-//                mDrawLayout.openDrawer(GravityCompat.START);
-//                break;
-//            default:
-//        }
-//        return true;
+    public void initViews(){
+        button = (Button) findViewById(R.id.test);
+        button_dingdan = (Button) findViewById(R.id.button_dingdan);
+        toolbar=(Toolbar)findViewById(R.id.toolbar);
+        navView=(NavigationView)findViewById(R.id.nav_view);
+        mDrawLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+    }
+    public void onBackPressed(){
+        if (quit == false) {    //询问退出程序
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            new Timer(true).schedule(new TimerTask() {   //启动定时任务
+                @Override
+                public void run() {
+                    quit = false;  //重置退出标识
+                }
+            }, 2000);        //2秒后运行run()方法
+            quit = true;
+        } else {          //确认退出程序
+            super.onBackPressed();
+            ActivityCollector.finishAll();
+        }
+    }
 }
 
 

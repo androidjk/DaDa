@@ -39,52 +39,47 @@
         <!--</FrameLayout>-->
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom" >
-    <Button
-    android:id="@+id/test"
-    android:layout_width="0dp"
-        android:layout_weight="1"
-    android:layout_height="wrap_content"
-    android:text="我要下单"
-    android:layout_gravity="bottom"
-        android:background="#f9f9f9"/>
-    <Button
-        android:id="@+id/button_myin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="我的信息"
-        android:background="#f9f9f9"/>
-    <Button
-        android:id="@+id/button_dingdan"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="我的订单"
-        android:background="#f9f9f9"/>
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <Button
+                android:id="@+id/test"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="#f9f9f9"
+                android:text="我要下单" />
+
+            <Button
+                android:id="@+id/button_myin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#f9f9f9"
+                android:text="我的信息" />
+
+            <Button
+                android:id="@+id/button_dingdan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#f9f9f9"
+                android:text="我的订单" />
+        </LinearLayout>
 
 
     </FrameLayout>
 
-    <TextView
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#FFF"
-        android:text="This is menu"
-        android:textSize="30sp" />
-
-<android.support.design.widget.NavigationView
-    android:id="@+id/nav_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="start"
-    app:menu="@menu/nav_menu"
-    app:headerLayout="@layout/nav_header"/>
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu" />
 </android.support.v4.widget.DrawerLayout>
 
 

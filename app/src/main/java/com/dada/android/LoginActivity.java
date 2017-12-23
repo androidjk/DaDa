@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dada.android.db.Bmobuser;
@@ -52,8 +53,7 @@ public class LoginActivity extends BaseActivity {
             }
         });
         if(bmobUser == null){
-            // 允许用户使用应用
-
+            // 进入登录界面
             denglu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 //登录
@@ -83,8 +83,11 @@ public class LoginActivity extends BaseActivity {
             });
         }
         else{
-            //缓存用户对象为空时， 可打开用户注册界面…
-            Intent intent=new Intent(LoginActivity.this, MainActivity.class);
+            //可以使用应用
+            String name=(String)BmobUser.getObjectByKey("username");
+            String phoneNumber=(String) BmobUser.getObjectByKey("mobilePhoneNumber");
+            String email=(String)BmobUser.getObjectByKey("email");
+            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);
         }
 
