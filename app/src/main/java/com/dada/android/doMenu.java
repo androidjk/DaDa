@@ -44,6 +44,7 @@ public class doMenu extends BaseActivity {
     Cark cark = new Cark();
     static Map list_price = new HashMap();
     //我们不一样
+    //emmmm,明天考erp
 
     static List list_name=new ArrayList();
     protected void onCreate(Bundle savedInstanceState) {
