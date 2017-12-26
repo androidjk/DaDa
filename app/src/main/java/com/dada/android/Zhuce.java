@@ -29,7 +29,6 @@ public class Zhuce extends ActivityCollector {
     private Person person;
     private EditText et_name, et_phone, et_mail, et_getPassword1, et_getPassword2;
     private RadioGroup sex;
-    private RadioButton man, woman;
     private Button button_send, button_shangchuan, button_chongchuan;
     private ImageView image_head;
     String sex1;
@@ -118,8 +117,6 @@ public class Zhuce extends ActivityCollector {
     public void initNews() {
         button_send = (Button) findViewById(R.id.button_send);
         sex = (RadioGroup) findViewById(R.id.rg_sex);
-        man = (RadioButton) findViewById(R.id.rb_man);
-        woman = (RadioButton) findViewById(R.id.rb_woman);
         et_mail = (EditText) findViewById(R.id.et_mail);
         et_name = (EditText) findViewById(R.id.et_getName);
         et_phone = (EditText) findViewById(R.id.et_phone);

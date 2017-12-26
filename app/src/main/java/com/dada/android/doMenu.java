@@ -37,15 +37,11 @@ public class doMenu extends BaseActivity {
     private SeekBar seekBar;
     private String type;
     private RadioGroup radioGroup;
-    private RadioButton rb_jc, rb_kc, rb_kec, rb_hc;
     static private ImageView iv_show;
     static String carType;
     static int price = 0;
     Cark cark = new Cark();
     static Map list_price = new HashMap();
-    //我们不一样
-    //emmmm,明天考erp
-
     static List list_name=new ArrayList();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +62,7 @@ public class doMenu extends BaseActivity {
             @Override
 
             public void done(List<Cark> list, BmobException e) {
-                String pName = null, place = null;
-                Log.d("测试", carType);
+                String pName = "keche", place = "http://bmob-cdn-15323.b0.upaiyun.com/2017/12/07/ff2a007a405ade6b80074cfc3184faea.png";
                 if (e == null) {
                     if (carType == "keche") {
                         if (price <= 500) {
@@ -123,7 +118,7 @@ public class doMenu extends BaseActivity {
     }
 
     /**
-     * 绑定布局
+     * 增加价格
      */
     public void sumPrice(final View view) {
         BmobQuery<Cark> query = new BmobQuery<Cark>();
@@ -177,9 +172,6 @@ public class doMenu extends BaseActivity {
         seekBar = (SeekBar) findViewById(R.id.seekbar);
         find = (Button) findViewById(R.id.button_find);
         iv_show = (ImageView) findViewById(R.id.iv_show);
-        rb_hc = (RadioButton) findViewById(R.id.cb_huoche);
-        rb_jc = (RadioButton) findViewById(R.id.cb_jiaoche);
-        rb_kec = (RadioButton) findViewById(R.id.cb_gongjiao);
         radioGroup = (RadioGroup) findViewById(R.id.rg_cheku);
     }
 
@@ -272,7 +264,6 @@ class SeekBarListener implements SeekBar.OnSeekBarChangeListener {
  */
 class RadioButtonListener implements RadioGroup.OnCheckedChangeListener {
     doMenu makeMenu = new doMenu();
-
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
         switch (i) {
@@ -292,8 +283,6 @@ class RadioButtonListener implements RadioGroup.OnCheckedChangeListener {
                 makeMenu.carType = "pika";
                 Log.d("RadioGroup", "皮卡");
                 break;
-            default:
-                makeMenu.carType = "keche";
         }
     }
 }

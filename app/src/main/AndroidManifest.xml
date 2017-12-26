@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".doMenu" />
-        <activity android:name=".HeaderText"></activity>
+        <activity android:name=".User_menu"></activity>
     </application>
 
 </manifest>
