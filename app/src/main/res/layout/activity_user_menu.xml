@@ -4,9 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.dada.android.User_menu">
-    <ListView
-        android:id="@+id/list_view"
+    <include
+        android:id="@+id/shopping_title"
+        layout="@layout/layout_title" />
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+    <TextView
+        android:id="@+id/tvselected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已选择了:" />
+    <ListView
+        android:id="@+id/lv"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"  />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/btn_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全选"
+            />
+        <Button
+            android:id="@+id/btn_fan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="反选"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_cancle"
+            android:text="取消已选"
+            />
+    </LinearLayout>
 </LinearLayout>
