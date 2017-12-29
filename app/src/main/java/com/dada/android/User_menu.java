@@ -1,7 +1,10 @@
 package com.dada.android;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -9,20 +12,27 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.dada.android.db.Bmobuser;
+import com.dada.android.db.Cark;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class User_menu extends BaseActivity implements View.OnClickListener{
+import cn.bmob.v3.BmobUser;
 
-    private TextView tvSelected;
+import static com.dada.android.doMenu.list_menu;
+import static com.dada.android.doMenu.list_name;
+
+public class User_menu extends BaseActivity{
+
+    private TextView tvSelected,bianji;
     private Button btnAll;
     private Button btnFan;
     private Button btnCancle;
     private ListView lv;
-    private List<HashMap<String,Object>> list;
-    private CheckBoxAdapter cbAdapter;
     private List<String> listStr = new ArrayList<String>();
     private String user_PhoneNum;
     @Override
@@ -30,90 +40,45 @@ public class User_menu extends BaseActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_menu);
         InitViews();
+        ArrayAdapter adapter=new ArrayAdapter(User_menu.this,android.R.layout.simple_list_item_1,doMenu.list_menu);
+        ListView listView=(ListView)findViewById(R.id.lv);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d("ceshi","aaaaa");
+                list_menu.get(i);
+                AlertDialog.Builder dialog=new AlertDialog.Builder(view.getContext());
+                dialog.setTitle("删除订单");
+                dialog.setMessage("确认删除订单吗？");
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        list_menu.remove(i);
+                        Log.d("ceshi22","aaaaa");
+                    }
+                });
+                dialog.setNegativeButton("再想想", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+            }
+        });
+        listView.setAdapter(adapter);
+        String username = (String) BmobUser.getObjectByKey("username");
+        String pid = (String) BmobUser.getObjectByKey("mobilePhoneNumber");
     }
 
     private void InitViews() {
         tvSelected = (TextView) findViewById(R.id.tvselected);
-        btnAll = (Button) findViewById(R.id.btn_all);
-        btnFan = (Button) findViewById(R.id.btn_fan);
-        btnCancle = (Button) findViewById(R.id.btn_cancle);
         lv = (ListView) findViewById(R.id.lv);
-        list = new ArrayList<HashMap<String,Object>>();
-        for(int i=0;i<10;i++){
-            HashMap<String, Object> map = new HashMap<String, Object>();
-            map.put("name", "G"+i);
-            map.put("boolean", false);//初始化为未选
-            list.add(map);
-        }//初始化数据
-
-        cbAdapter = new CheckBoxAdapter(this,list);
-        lv.setAdapter(cbAdapter);
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-                CheckBoxAdapter.ViewCache viewCache = (CheckBoxAdapter.ViewCache) view.getTag();
-                viewCache.cb.toggle();
-                list.get(position).put("boolean", viewCache.cb.isChecked());
-
-                cbAdapter.notifyDataSetChanged();
-
-                if(viewCache.cb.isChecked()){//被选中状态
-                    listStr.add(list.get(position).get("name").toString());
-                }else//从选中状态转化为未选中
-                {
-                    listStr.remove(list.get(position).get("name").toString());
-                }
-
-                tvSelected.setText("已选择了:"+listStr.size()+"项");
-            }
-        });
-
-        btnAll.setOnClickListener(this);
-        btnCancle.setOnClickListener(this);
-        btnFan.setOnClickListener(this);
+        bianji=(TextView)findViewById(R.id.bt_header_right) ;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_all://全选,修改值为true
-                for(int i=0;i<list.size() && !(Boolean)list.get(i).get("boolean") ;i++){
-                    list.get(i).put("boolean", true);
-                    listStr.add(list.get(i).get("name").toString());
-                }
-                cbAdapter.notifyDataSetChanged();
 
-                tvSelected.setText("已选择了:"+listStr.size()+"项");
-                break;
-            case R.id.btn_fan:
-                for(int i=0;i<list.size();i++){
-                    if((Boolean)list.get(i).get("boolean")){//为true
-                        list.get(i).put("boolean", false);
-                        listStr.remove(list.get(i).get("name").toString());
-                    }
-                    else
-                    {
-                        list.get(i).put("boolean", true);
-                        listStr.add(list.get(i).get("name").toString());
-                    }
-                }
-                cbAdapter.notifyDataSetChanged();
 
-                tvSelected.setText("已选择了:"+listStr.size()+"项");
-                break;
-            case R.id.btn_cancle://取消已选
-                for(int i=0;i<list.size();i++){
-                    if((Boolean)list.get(i).get("boolean")){
-                        list.get(i).put("boolean", false);
-                        listStr.remove(list.get(i).get("name").toString());
-                    }
-                }
-                cbAdapter.notifyDataSetChanged();
 
-                tvSelected.setText("已选择了:"+listStr.size()+"项");
-                break;
-        }
-    }
+
 }

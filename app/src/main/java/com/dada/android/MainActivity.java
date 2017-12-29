@@ -32,7 +32,6 @@ public class MainActivity extends BaseActivity {
     Toolbar toolbar;
     NavigationView navView;
     TextView userName,userEmail;
-    static String name,email;
     /**
      * 首页
      * @param savedInstanceState
@@ -83,6 +82,7 @@ public class MainActivity extends BaseActivity {
                 switch (item.getItemId()){
                     case R.id.nav_id:
                         BmobUser.logOut();   //清除缓存用户对象
+                        BmobUser currentUser = BmobUser.getCurrentUser();  //清除缓存用户对象
                         Intent intent=new Intent(MainActivity.this,LoginActivity.class);
                         startActivity(intent);
                         ActivityCollector.finishAll();

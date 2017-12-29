@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dada.android.Manager">
+    <Button
+        android:id="@+id/chaxun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查询"
+        android:layout_centerVertical="true"/>
+    <EditText
+        android:id="@+id/et_id"
+        android:layout_toRightOf="@id/chaxun"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="输入要查询的用户id"
+        android:layout_gravity="center_vertical"
+        android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+

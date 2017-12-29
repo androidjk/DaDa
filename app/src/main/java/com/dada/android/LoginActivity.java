@@ -28,8 +28,7 @@ import cn.bmob.v3.listener.SaveListener;
 public class LoginActivity extends BaseActivity {
     private EditText account;
     private EditText password;
-    private Button denglu;
-    private Button zhuce;
+    private Button denglu,zhuce,bt_gly;
     Bmobuser user=new Bmobuser();
     /**
      * 用户登录
@@ -45,6 +44,18 @@ public class LoginActivity extends BaseActivity {
         password = (EditText) findViewById(R.id.et_password);
         denglu = (Button) findViewById(R.id.button_denglu);
         zhuce = (Button) findViewById(R.id.button_zhuce);
+        bt_gly=(Button)findViewById(R.id.button_gly);
+        bt_gly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (account.getText().equals("admin")&&password.getText().equals("123456")){
+                    Intent intent=new Intent(LoginActivity.this,Manager.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(LoginActivity.this, "不存在该管理员", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         zhuce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,9 +95,6 @@ public class LoginActivity extends BaseActivity {
         }
         else{
             //可以使用应用
-            String name=(String)BmobUser.getObjectByKey("username");
-            String phoneNumber=(String) BmobUser.getObjectByKey("mobilePhoneNumber");
-            String email=(String)BmobUser.getObjectByKey("email");
             Intent intent=new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);
         }

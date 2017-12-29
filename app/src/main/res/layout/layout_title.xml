@@ -13,7 +13,6 @@
         android:drawableLeft="@drawable/ddhk_header_back"
         android:paddingLeft="10dp"
         android:paddingTop="20dip"
-        android:text="返回"
         android:textColor="#000"
         android:textSize="14sp"
         android:layout_alignParentTop="true"
@@ -42,7 +41,8 @@
         android:text="编辑"
         android:paddingTop="20dip"
         android:textColor="#000"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:clickable="true"/>
 
 
 </RelativeLayout>
