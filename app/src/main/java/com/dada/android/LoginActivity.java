@@ -48,7 +48,7 @@ public class LoginActivity extends BaseActivity {
         bt_gly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (account.getText().equals("admin")&&password.getText().equals("123456")){
+                if (account.getText().toString().equals("admin")&&password.getText().toString().equals("123456")){
                     Intent intent=new Intent(LoginActivity.this,Manager.class);
                     startActivity(intent);
                 }else {

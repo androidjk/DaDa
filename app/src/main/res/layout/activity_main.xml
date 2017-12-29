@@ -21,28 +21,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom">
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/test"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
                 android:background="#f9f9f9"
                 android:text="我要下单" />
 
-            <Button
-                android:id="@+id/button_myin"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#f9f9f9"
-                android:text="我的信息" />
+
 
             <Button
                 android:id="@+id/button_dingdan"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#f9f9f9"

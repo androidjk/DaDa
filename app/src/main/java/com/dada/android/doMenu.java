@@ -110,9 +110,11 @@ public class doMenu extends BaseActivity {
                             Glide.with(view.getContext())
                                     .load(s)
                                     .into(iv_show);
-                            Toast.makeText(view.getContext(), "下载成功，保存路径", Toast.LENGTH_SHORT).show();
+                            Log.d("图片下载","下载成功，保存路径");
+//                            Toast.makeText(view.getContext(), "下载成功，保存路径", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(view.getContext(), "下载成功", Toast.LENGTH_SHORT).show();
+                            Log.d("图片下载","下载成功");
+//                            Toast.makeText(view.getContext(), "下载成功", Toast.LENGTH_SHORT).show();
                         }
                     }
 

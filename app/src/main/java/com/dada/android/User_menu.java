@@ -45,7 +45,6 @@ public class User_menu extends BaseActivity{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("ceshi","aaaaa");
                 list_menu.get(i);
                 AlertDialog.Builder dialog=new AlertDialog.Builder(view.getContext());
                 dialog.setTitle("删除订单");

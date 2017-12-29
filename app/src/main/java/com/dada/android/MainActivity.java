@@ -26,12 +26,9 @@ public class MainActivity extends BaseActivity {
     private DrawerLayout mDrawLayout;
     public static MainActivity mainActivity;
     private boolean quit=false;
-    doMenu makeMenu = new doMenu();
-    LinearLayout linear;
     Button button, button_dingdan;
     Toolbar toolbar;
     NavigationView navView;
-    TextView userName,userEmail;
     /**
      * 首页
      * @param savedInstanceState
@@ -47,14 +44,6 @@ public class MainActivity extends BaseActivity {
         initViews();
         setSupportActionBar(toolbar);
 
-//       userName=(TextView)findViewById(R.id.username);
-//        userEmail=(TextView)findViewById(R.id.mail);
-//         name=(String)BmobUser.getObjectByKey("username");
-//         email=(String)BmobUser.getObjectByKey("email");
-//        Log.d("改Text值",name);
-//        Log.d("改Text值",email);
-//        userName.setText(name);
-//        userEmail.setText(email+"");
         /**
          * 订单按钮
          */
