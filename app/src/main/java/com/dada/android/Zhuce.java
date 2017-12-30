@@ -30,7 +30,6 @@ public class Zhuce extends ActivityCollector {
     private EditText et_name, et_phone, et_mail, et_getPassword1, et_getPassword2;
     private RadioGroup sex;
     private Button button_send, button_shangchuan, button_chongchuan;
-    private ImageView image_head;
     String sex1;
 
     @Override
@@ -78,40 +77,6 @@ public class Zhuce extends ActivityCollector {
                 });
             }
         });
-//        button_send.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (et_getPassword1.getText().toString().equals(et_getPassword2.getText().toString())) {
-//                    if (et_name.getText().toString() != null && et_id.getText().toString() != null && et_phone
-//                            .getText().toString() != null && sex1 != null) {
-//                        person.setName(et_name.getText().toString());
-//                        person.setId(et_id.getText().toString());
-//                        person.setPhone(et_phone.getText().toString());
-//                        person.setSex(sex1);
-//                        person.setPassword(et_getPassword1.getText().toString());
-//                        person.save(new SaveListener<String>() {
-//                                        @Override
-//                                        public void done(String s, BmobException e) {
-//                                            if (e == null) {
-//                                                Toast.makeText(Zhuce.this, "创建数据成功", Toast.LENGTH_SHORT).show();
-//                                            } else {
-//                                                Log.i("bmob", "失败：" + e.getMessage() + "," + e.getErrorCode());
-//                                                Toast.makeText(Zhuce.this, "该身份证号已经被注册", Toast.LENGTH_SHORT).show();
-//                                            }
-//                                        }
-//                                    }
-//                        );
-//                    } else {
-//                        Toast.makeText(Zhuce.this, "有重要信息未填，请输入重试", Toast.LENGTH_SHORT).show();
-//                    }
-//                } else {
-//                    Toast.makeText(Zhuce.this, "前后密码不一致。请重新输入", Toast.LENGTH_SHORT).show();
-//                    }
-//            Intent intent=new Intent(Zhuce.this,MainActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
     }
 
     public void initNews() {

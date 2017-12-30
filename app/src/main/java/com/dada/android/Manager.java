@@ -59,7 +59,7 @@ public class Manager extends BaseActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                                    new AlertDialog.Builder(view.getContext())//以用户id为主键删除订单
+                                    new AlertDialog.Builder(view.getContext())//以用户id为主键删除订单，弹窗
                                             .setTitle("提示")
                                             .setMessage("要删除该订单吗")
                                             .setPositiveButton("是", new DialogInterface.OnClickListener() {
@@ -98,6 +98,7 @@ public class Manager extends BaseActivity {
 
         });
     }
+
     private void initViews() {
         chaxun = (Button) findViewById(R.id.chaxun);
         editText = (EditText) findViewById(R.id.et_id);

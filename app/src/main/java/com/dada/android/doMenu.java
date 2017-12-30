@@ -37,7 +37,6 @@ import static android.widget.Toast.LENGTH_SHORT;
 public class doMenu extends BaseActivity {
     private Button show, find, add, delete, back;
     private SeekBar seekBar;
-    private String type;
     private RadioGroup radioGroup;
     private TextView textName,textSex,textPid;
     static private ImageView iv_show;
