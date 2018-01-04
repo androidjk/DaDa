@@ -29,9 +29,6 @@ import static com.dada.android.doMenu.list_name;
 public class User_menu extends BaseActivity{
 
     private TextView tvSelected,bianji;
-    private Button btnAll;
-    private Button btnFan;
-    private Button btnCancle;
     private ListView lv;
     private List<String> listStr = new ArrayList<String>();
     private String user_PhoneNum;
@@ -54,7 +51,6 @@ public class User_menu extends BaseActivity{
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         list_menu.remove(i);
-                        Log.d("ceshi22","aaaaa");
                     }
                 });
                 dialog.setNegativeButton("再想想", new DialogInterface.OnClickListener() {
@@ -66,8 +62,6 @@ public class User_menu extends BaseActivity{
             }
         });
         listView.setAdapter(adapter);
-        String username = (String) BmobUser.getObjectByKey("username");
-        String pid = (String) BmobUser.getObjectByKey("mobilePhoneNumber");
     }
 
     private void InitViews() {
@@ -75,9 +69,4 @@ public class User_menu extends BaseActivity{
         lv = (ListView) findViewById(R.id.lv);
         bianji=(TextView)findViewById(R.id.bt_header_right) ;
     }
-
-
-
-
-
 }

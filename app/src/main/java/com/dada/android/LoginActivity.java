@@ -28,10 +28,12 @@ import cn.bmob.v3.listener.SaveListener;
 public class LoginActivity extends BaseActivity {
     private EditText account;
     private EditText password;
-    private Button denglu,zhuce,bt_gly;
-    Bmobuser user=new Bmobuser();
+    private Button denglu, zhuce, bt_gly;
+    Bmobuser user = new Bmobuser();
+
     /**
      * 用户登录
+     *
      * @param savedInstanceState
      */
     @Override
@@ -44,14 +46,14 @@ public class LoginActivity extends BaseActivity {
         password = (EditText) findViewById(R.id.et_password);
         denglu = (Button) findViewById(R.id.button_denglu);
         zhuce = (Button) findViewById(R.id.button_zhuce);
-        bt_gly=(Button)findViewById(R.id.button_gly);
+        bt_gly = (Button) findViewById(R.id.button_gly);
         bt_gly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (account.getText().toString().equals("admin")&&password.getText().toString().equals("123456")){
-                    Intent intent=new Intent(LoginActivity.this,Manager.class);
+                if (account.getText().toString().equals("admin") && password.getText().toString().equals("123456")) {
+                    Intent intent = new Intent(LoginActivity.this, Manager.class);
                     startActivity(intent);
-                }else {
+                } else {
                     Toast.makeText(LoginActivity.this, "不存在该管理员", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -63,7 +65,7 @@ public class LoginActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
-        if(bmobUser == null){
+        if (bmobUser == null) {
             // 进入登录界面
             denglu.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -75,28 +77,27 @@ public class LoginActivity extends BaseActivity {
                     user.login(new SaveListener<Person>() {
                         @Override
                         public void done(Person person, BmobException e) {
-                            if (e==null){
+                            if (e == null) {
                                 Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                                BmobUser use=BmobUser.getCurrentUser();
-                                if (use!=null){
+                                BmobUser use = BmobUser.getCurrentUser();
+                                if (use != null) {
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
-                                }else {
+                                } else {
                                     Toast.makeText(LoginActivity.this, "不存在该用户，请注册", Toast.LENGTH_SHORT).show();
                                 }
-                            }
-                            else{
-                                Log.d("登录失败",e.getMessage());
+                            } else {
+                                Log.d("登录失败", e.getMessage());
                             }
                         }
                     });
                 }
             });
-        }
-        else{
+        } else {
             //可以使用应用
-            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         }
 
-}}
+    }
+}

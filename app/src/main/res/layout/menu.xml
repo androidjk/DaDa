@@ -31,6 +31,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:textColor="#000"
+            android:text="我要下单"
             android:textSize="16dp" />
     </RelativeLayout>
     <LinearLayout

@@ -98,7 +98,6 @@ public class Manager extends BaseActivity {
 
         });
     }
-
     private void initViews() {
         chaxun = (Button) findViewById(R.id.chaxun);
         editText = (EditText) findViewById(R.id.et_id);
