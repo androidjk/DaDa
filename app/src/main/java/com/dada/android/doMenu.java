@@ -57,7 +57,8 @@ public class doMenu extends BaseActivity {
         textPid.setText((String)BmobUser.getObjectByKey("mobilePhoneNumber"));
         textSex.setText((String)BmobUser.getObjectByKey("sex"));
     }
-
+    //日常git
+    //这么难得吗？
 
     /**
      * 下载图片
